@@ -7,9 +7,11 @@ However, if there is a platform for those who lose something or notice that some
 ### Aim
 We hope to help the owner of the lost property find their items easily and quickly by providing them a platform that collects information. By using the app-based platform, they could get more information and luckily they may find their loss has been posted by on the platform, and then can get it back by following detailed information provided by finders.
 ### User Stories
-1.As a student or staff who loses something on campus, I want to know if anyone has seen them and if yes, I can contact them to get my items back.
-2.As a student or staff who loses something on campus, I want to post them on the app so that there are more chances it is noticed or found by others.
-3.As a student or staff who picks up something on campus, I want to post the picture and some information like where can the owner get it, who the owner can contact to help the owner find it back as soon as possible.
+1. As a student or staff who loses something on campus, I want to know if anyone has seen them and if yes, I can contact them to get my items back.
+
+2. As a student or staff who loses something on campus, I want to post them on the app so that there are more chances it is noticed or found by others.
+
+3. As a student or staff who picks up something on campus, I want to post the picture and some information like where can the owner get it, who the owner can contact to help the owner find it back as soon as possible.
 
 ## Techonology
 1. Android Studio in Java
