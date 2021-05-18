@@ -31,6 +31,8 @@ We hope to help the owner of the lost property find their items easily and quick
   <img width="337" alt="RegisterUI2" src="https://user-images.githubusercontent.com/68378928/118600120-2029c680-b7e3-11eb-96c6-e1b93abb7db9.png">
 </p>
 
+### Home
+
 ### Profile
 Update users information
 1. Photo
