@@ -8,18 +8,45 @@
 
 
 
+
     <include
         android:id="@+id/include"
         layout="@layout/content_main" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="117dp"
-        android:layout_height="111dp"
-        android:text="Lost"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lostItemView"
+        android:layout_width="400dp"
+        android:layout_height="614dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.495" />
+
+    <TextView
+        android:id="@+id/greetingMSG"
+        android:layout_width="167dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
+        android:text="Hi"
+        android:textColor="@color/blue"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/postLostBtn"
+        android:layout_width="148dp"
+        android:layout_height="38dp"
+        android:text="+ CREATE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toEndOf="@+id/greetingMSG"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
