@@ -19,6 +19,7 @@ We hope to help the owner of the lost property find their items easily and quick
 ## User Interfaces
 ### Login and Registraction
 1. Login and register using Gmail
+
 2. Login and register by creating a WeFound account
 
 ### Profile
@@ -32,4 +33,5 @@ Update users information
 ### Found
 
 ## Contributors
-Feng Zhunyi    Zhou ChengXu
+Feng Zhunyi
+Zhou ChengXu
