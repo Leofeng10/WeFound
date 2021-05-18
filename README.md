@@ -38,6 +38,9 @@ Update users information
 3. Faculty
 4. Student ID
 5. Phone Number
+
+<img width="339" alt="profileUI" src="https://user-images.githubusercontent.com/68378928/118607045-b6adb600-b7ea-11eb-9434-054ce496ff29.png">
+
 ### Lost
 ### Found
 
