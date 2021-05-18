@@ -20,6 +20,14 @@ We hope to help the owner of the lost property find their items easily and quick
 ### Login and Registraction
 1. Login and register using Gmail
 2. Login and register by creating a WeFound account
+
+### Profile
+Update users information
+1. Photo
+2. Name
+3. Faculty
+4. Student ID
+5. Phone Number
 ### Lost
 ### Found
 
