@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "251440482619",
+    "project_id": "orbital-32bb6",
+    "storage_bucket": "orbital-32bb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251440482619:android:444de194c961443b2b8f1e",
+        "android_client_info": {
+          "package_name": "com.example.orbital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251440482619-4lnki25563015b4n3lt4qpnnn2413lbq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd_0U162vw5SaE45HzSuQ6dFsUDmiMft8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251440482619-4lnki25563015b4n3lt4qpnnn2413lbq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

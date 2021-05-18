@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.orbital">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Orbital"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".UserInfoActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".SendMessage"
+            android:label="Message"
+            android:parentActivityName=".LostItemDetail" />
+        <activity
+            android:name=".profile"
+            android:label="Profile"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LostItemDetail"
+            android:label="Details"
+            android:parentActivityName=".Lost" />
+        <activity
+            android:name=".PostItem"
+            android:label="Post Your Lost Item"
+            android:parentActivityName=".Lost" />
+        <activity
+            android:name=".Found"
+            android:label="Found"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Lost"
+            android:label="Lost"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Signup" />
+        <activity
+            android:name=".MainActivity"
+            android:label="WeFound"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".Login"
+            android:label="WeFound">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
