@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class Login extends AppCompatActivity {
 
     EditText userName, Password;
-    Button button;
+    Button button, buttonSignin;
     DBhelper db;
 
     @Override
@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
         userName = findViewById(R.id.editTextTextPersonName);
         Password = findViewById(R.id.editTextTextPassword);
         button = findViewById(R.id.Loginbutton);
+        buttonSignin = findViewById(R.id.buttonSignin);
         db = new DBhelper(this);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -37,12 +38,24 @@ public class Login extends AppCompatActivity {
                 if (db.checkuserpassword(username, password)) {
                     Toast.makeText(Login.this, "Log in successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
+
+                    i.putExtra("username", username);
+                    i.putExtra("phone", db.getPhoneNumber(username));
                     startActivity(i);
+
 
                 } else {
                     Toast.makeText(Login.this, "Failed to log in", Toast.LENGTH_SHORT).show();
 
                 }
+            }
+        });
+
+        buttonSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(i);
             }
         });
     }
