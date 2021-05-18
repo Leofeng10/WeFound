@@ -18,11 +18,17 @@ We hope to help the owner of the lost property find their items easily and quick
 
 ## User Interfaces
 ### Login and Registraction
-1. Login and register using Gmail
+#### Login and register using Gmail
 
-2. Login and register by creating a WeFound account
-<img width="343" alt="Login UI" src="https://user-images.githubusercontent.com/68378928/118600110-1902b880-b7e3-11eb-9465-f50da19b04a5.png">
-<img width="337" alt="RegisterUI2" src="https://user-images.githubusercontent.com/68378928/118600120-2029c680-b7e3-11eb-96c6-e1b93abb7db9.png">
+<p float="left">
+  <img width="337" alt="LogINUI2" src="https://user-images.githubusercontent.com/68378928/118600255-56ffdc80-b7e3-11eb-9c27-c537884e89a4.png">
+  <img width="336" alt="RegisterUI" src="https://user-images.githubusercontent.com/68378928/118600269-59facd00-b7e3-11eb-8932-b183a562fbeb.png">
+</p>
+#### Login and register by creating a WeFound account
+<p float="left">
+  <img width="343" alt="Login UI" src="https://user-images.githubusercontent.com/68378928/118600110-1902b880-b7e3-11eb-9465-f50da19b04a5.png">
+  <img width="337" alt="RegisterUI2" src="https://user-images.githubusercontent.com/68378928/118600120-2029c680-b7e3-11eb-96c6-e1b93abb7db9.png">
+</p>
 
 ### Profile
 Update users information
