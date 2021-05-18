@@ -21,6 +21,8 @@ We hope to help the owner of the lost property find their items easily and quick
 1. Login and register using Gmail
 
 2. Login and register by creating a WeFound account
+<img width="343" alt="Login UI" src="https://user-images.githubusercontent.com/68378928/118600110-1902b880-b7e3-11eb-9465-f50da19b04a5.png">
+<img width="337" alt="RegisterUI2" src="https://user-images.githubusercontent.com/68378928/118600120-2029c680-b7e3-11eb-96c6-e1b93abb7db9.png">
 
 ### Profile
 Update users information
