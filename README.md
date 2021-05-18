@@ -33,6 +33,12 @@ We hope to help the owner of the lost property find their items easily and quick
 
 ### Home
 
+<p float="left">
+ <img width="336" alt="Home1" src="https://user-images.githubusercontent.com/68378928/118607438-2754d280-b7eb-11eb-9059-ade753968194.png">
+<img width="340" alt="Home2" src="https://user-images.githubusercontent.com/68378928/118607440-27ed6900-b7eb-11eb-9c11-eea1f85dfa2f.png">
+</p>
+
+
 ### Profile
 Update users information
 1. Photo
