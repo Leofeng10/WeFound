@@ -12,9 +12,9 @@ We hope to help the owner of the lost property find their items easily and quick
 3.As a student or staff who picks up something on campus, I want to post the picture and some information like where can the owner get it, who the owner can contact to help the owner find it back as soon as possible.
 
 ## Techonology
-• Android Studio in Java
-• Firebase
-• SQLite
+1. Android Studio in Java
+2. Firebase
+3. SQLite
 
 ## User Interfaces
 ### Login and Registraction
