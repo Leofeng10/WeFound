@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">WeFound</string>
+
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="Open">NavBar</string>
+    <string name="Close">NavBar</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+    <string name="hint_enter_name">Enter Full Name</string>
+    <string name="hint_enter_school">Enter School Name</string>
+    <string name="hint_enter_id">Enter School ID</string>
+    <string name="hint_enter_phone_num">Enter Phone Number</string>
+    <string name="hint_description">Add Description</string>
+    <string name="hint_title">Add Title</string>
+</resources>
