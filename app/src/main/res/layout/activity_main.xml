@@ -27,7 +27,7 @@
 
         <Button
             android:id="@+id/lostBtn"
-            android:layout_width="210dp"
+            android:layout_width="209dp"
             android:layout_height="600dp"
             android:layout_marginTop="64dp"
             android:backgroundTint="@color/colorPrimaryDark"
