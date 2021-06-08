@@ -18,38 +18,55 @@
 
         <TextView
             android:id="@+id/lostitemName"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lostitemimage"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="75dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
             android:text="Name"
             android:textStyle="bold" />
 
-
-
         <TextView
             android:id="@+id/lostitemLocation"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/lostitemName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_alignStart="@+id/lostitemName"
+            android:layout_alignLeft="@+id/lostitemName"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="-2dp"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
             android:text="Location"
             android:textStyle="bold" />
 
+
         <TextView
             android:id="@+id/lostitemTime"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/lostitemLocation"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_alignStart="@+id/lostitemLocation"
+            android:layout_alignLeft="@+id/lostitemLocation"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
             android:text="Time"
             android:textStyle="bold" />
-
-
-
 
         <ImageView
             android:id="@+id/lostitemimage"
@@ -75,6 +92,52 @@
             android:layout_marginLeft="10dp"
             android:text="Details"
             android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lostitemimage"
+
+
+            android:layout_alignStart="@+id/lostitemimage"
+            android:layout_alignLeft="@+id/lostitemimage"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="2dp"
+            android:text="Item" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView6"
+            android:layout_alignStart="@+id/textView6"
+            android:layout_alignLeft="@+id/textView6"
+            android:layout_marginStart="-1dp"
+            android:layout_marginLeft="-1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_toStartOf="@+id/lostitemLocation"
+            android:layout_toLeftOf="@+id/lostitemLocation"
+            android:text="Location" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
+            android:layout_alignStart="@+id/textView7"
+            android:layout_alignLeft="@+id/textView7"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-2dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_toStartOf="@+id/lostitemTime"
+            android:layout_toLeftOf="@+id/lostitemTime"
+            android:text="Time" />
 
     </RelativeLayout>
 

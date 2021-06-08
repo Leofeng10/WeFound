@@ -16,33 +16,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.ViewHolder> {
+public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder_Record> {
 
     public ArrayList<Item> lostItems;
     private Context context;
     Button detailsBtn;
-    public RecyclerViewOnClickListener listener;
+    public LostItemAdapter.RecyclerViewOnClickListener listener;
 
-    public LostItemAdapter(Context context, ArrayList<Item> lostItems,  RecyclerViewOnClickListener listener) {
+    public RecordAdapter(Context context, ArrayList<Item> lostItems,  LostItemAdapter.RecyclerViewOnClickListener listener) {
         this.context = context;
         this.listener = listener;
         this.lostItems = lostItems;
     }
 
-    public LostItemAdapter(Context context, ArrayList<Item> lostItems) {
+    public RecordAdapter(Context context, ArrayList<Item> lostItems) {
         this.context = context;
         this.lostItems = lostItems;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lost_item_list, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+    public ViewHolder_Record onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_item_list, parent, false);
+        ViewHolder_Record holder = new ViewHolder_Record(view);
         return holder;
     }
+
 
     public String shortenString(String s) {
         if (s.length() > 10) {
@@ -55,12 +55,14 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder_Record holder, int position) {
         holder.lostitemName.setText(shortenString(lostItems.get(position).getName()));
         holder.lostitemLocation.setText(shortenString(lostItems.get(position).getLocation()));
         holder.lostitemTime.setText(shortenString(lostItems.get(position).getTime()));
         Picasso.get().load(lostItems.get(position).getImageurl()).fit().centerCrop().into(holder.lostItemImage);
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -72,20 +74,20 @@ public class LostItemAdapter extends RecyclerView.Adapter<LostItemAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder_Record extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView lostitemName, lostitemLocation, lostitemTime;
         private ImageView lostItemImage;
 
         private CardView parent;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder_Record(@NonNull View itemView) {
             super(itemView);
-            lostitemName = itemView.findViewById(R.id.lostitemName);
-            lostitemLocation = itemView.findViewById(R.id.lostitemLocation);
-            lostitemTime = itemView.findViewById(R.id.lostitemTime);
-            parent = itemView.findViewById(R.id.lostitemparent);
-            detailsBtn = itemView.findViewById(R.id.LostItemDetailsBtn);
-            lostItemImage = itemView.findViewById(R.id.lostitemimage);
+            lostitemName = itemView.findViewById(R.id.recorditemName);
+            lostitemLocation = itemView.findViewById(R.id.recorditemLocation);
+            lostitemTime = itemView.findViewById(R.id.recorditemTime);
+            parent = itemView.findViewById(R.id.recorditemparent);
+            detailsBtn = itemView.findViewById(R.id.recordItemDetailsBtn);
+            lostItemImage = itemView.findViewById(R.id.recorditemimage);
 
             detailsBtn.setOnClickListener(this);
 

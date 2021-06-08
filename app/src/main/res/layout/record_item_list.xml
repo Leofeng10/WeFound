@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    android:id="@+id/recorditemparent"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="10dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="400dp"
+        android:layout_height="190dp"
+        android:paddingBottom="10dp"
+        android:padding="10dp">
+
+
+        <TextView
+            android:id="@+id/recorditemName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="52dp"
+            android:text="Name"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recorditemLocation"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:text="Location"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/recorditemName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/recorditemName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recorditemTime"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="52dp"
+            android:text="Time"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/recorditemLocation"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/recorditemLocation"
+            app:layout_constraintTop_toBottomOf="@+id/recorditemLocation" />
+
+        <ImageView
+            android:id="@+id/recorditemimage"
+            android:layout_width="153dp"
+            android:layout_height="175dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginLeft="36dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.333"
+            app:srcCompat="@drawable/ic_launcher_background">
+
+        </ImageView>
+
+        <Button
+            android:id="@+id/recordItemDetailsBtn"
+            android:layout_width="120dp"
+            android:layout_height="32dp"
+            android:layout_below="@+id/recorditemTime"
+
+
+            android:text="Details"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/recorditemimage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recorditemimage" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="Item"
+            app:layout_constraintBottom_toBottomOf="@+id/recorditemName"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/recorditemName"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Location"
+            app:layout_constraintBottom_toBottomOf="@+id/recorditemLocation"
+            app:layout_constraintStart_toEndOf="@+id/recorditemimage"
+            app:layout_constraintTop_toTopOf="@+id/recorditemLocation"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            app:layout_constraintBottom_toBottomOf="@+id/recorditemTime"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/recorditemTime"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
