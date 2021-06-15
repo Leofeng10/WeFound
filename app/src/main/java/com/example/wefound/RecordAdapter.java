@@ -1,6 +1,7 @@
 package com.example.wefound;
 
 import android.content.Context;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     public ArrayList<Item> lostItems;
     private Context context;
     Button detailsBtn;
+    ViewHolder_Record holder;
+    boolean isSelected = false;
     public LostItemAdapter.RecyclerViewOnClickListener listener;
 
     public RecordAdapter(Context context, ArrayList<Item> lostItems,  LostItemAdapter.RecyclerViewOnClickListener listener) {
@@ -35,11 +38,17 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         this.lostItems = lostItems;
     }
 
+//    @Override
+//    public boolean onPrepareActionMode(ActionMode actionMode) {
+//        clickItem(holder);
+//        return false;
+//    }
+
     @NonNull
     @Override
     public ViewHolder_Record onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_item_list, parent, false);
-        ViewHolder_Record holder = new ViewHolder_Record(view);
+        holder = new ViewHolder_Record(view);
         return holder;
     }
 
@@ -60,6 +69,21 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         holder.lostitemLocation.setText(shortenString(lostItems.get(position).getLocation()));
         holder.lostitemTime.setText(shortenString(lostItems.get(position).getTime()));
         Picasso.get().load(lostItems.get(position).getImageurl()).fit().centerCrop().into(holder.lostItemImage);
+        holder.checkedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.checkedImage.setVisibility(View.INVISIBLE);
+                holder.uncheckedImage.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.uncheckedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.checkedImage.setVisibility(View.VISIBLE);
+                holder.uncheckedImage.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
 
@@ -78,6 +102,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
         private TextView lostitemName, lostitemLocation, lostitemTime;
         private ImageView lostItemImage;
+        private ImageView checkedImage;
+        private ImageView uncheckedImage;
+
 
         private CardView parent;
         public ViewHolder_Record(@NonNull View itemView) {
@@ -88,6 +115,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             parent = itemView.findViewById(R.id.recorditemparent);
             detailsBtn = itemView.findViewById(R.id.recordItemDetailsBtn);
             lostItemImage = itemView.findViewById(R.id.recorditemimage);
+            checkedImage = itemView.findViewById(R.id.checkedimage);
+            uncheckedImage = itemView.findViewById(R.id.uncheckedimage);
 
             detailsBtn.setOnClickListener(this);
 
