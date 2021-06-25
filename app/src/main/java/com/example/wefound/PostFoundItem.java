@@ -42,7 +42,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
-public class PostItem extends AppCompatActivity implements View.OnClickListener{
+public class PostFoundItem extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth firebaseAuth;
 
@@ -52,11 +52,11 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView imageView;
 
-    private ProgressDialog progressDialog;
-
     private Uri imageUri;
 
     private ProgressBar progressBar;
+
+    private ProgressDialog progressDialog;
 
     Button postBtn, buttonCamera, buttonChooseImage;
     ImageView image;
@@ -76,28 +76,28 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_item);
-        postBtn = findViewById(R.id.PostBtn);
-        name = findViewById(R.id.postLostItemName);
-        location = findViewById(R.id.postLostItemLocation);
-        description = findViewById(R.id.postLostItemDescription);
-        time = findViewById(R.id.postLostItemTime);
-        phone = findViewById(R.id.postLostItemPhone);
-        username = findViewById(R.id.postLostItemUser);
-        image = findViewById(R.id.postItemImage);
-        buttonCamera = findViewById(R.id.lost_buttonCamera);
-        buttonChooseImage = findViewById(R.id.button_lost_choose_image);
+        setContentView(R.layout.activity_post_found_item);
+        postBtn = findViewById(R.id.PostFoundBtn);
+        name = findViewById(R.id.postFoundItemName);
+        location = findViewById(R.id.postFoundItemLocation);
+        description = findViewById(R.id.postFoundItemDescription);
+        time = findViewById(R.id.postFoundItemTime);
+        phone = findViewById(R.id.postFoundItemPhone);
+        username = findViewById(R.id.postFoundItemUser);
+        image = findViewById(R.id.postFoundItemImage);
+        buttonCamera = findViewById(R.id.found_buttonCamera);
+        buttonChooseImage = findViewById(R.id.button_found_choose_image);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-
         progressDialog = new ProgressDialog(this);
-        imageView = (ImageView) findViewById(R.id.postItemImage);
+
+        imageView = (ImageView) findViewById(R.id.postFoundItemImage);
 
         progressBar = findViewById(R.id.progress_bar);
 
         // Initialize firestore
-        storageRef = FirebaseStorage.getInstance().getReference("Lost");
+        storageRef = FirebaseStorage.getInstance().getReference("FOUND");
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -161,7 +161,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
                     FirebaseUser currUser = firebaseAuth.getCurrentUser();
 
                     Item myItem = new Item(myname, mylocation, mydescription, mytime, myphone, myusername, downloadUrl.toString(), currUser.getUid(), id);
-                    databaseReference = FirebaseDatabase.getInstance().getReference("/LOST/");
+                    databaseReference = FirebaseDatabase.getInstance().getReference("/FOUND/");
                     databaseReference.child(id).setValue(myItem);
                     Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
@@ -208,11 +208,12 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
                                 FirebaseUser currUser = firebaseAuth.getCurrentUser();
 
                                 Item myItem = new Item(myname, mylocation, mydescription, mytime, myphone, myusername, downloadUrl.toString(), currUser.getUid(), id);
-                                databaseReference = FirebaseDatabase.getInstance().getReference("/LOST/");
+                                databaseReference = FirebaseDatabase.getInstance().getReference("/FOUND/");
                                 databaseReference.child(id).setValue(myItem);
                                 Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
                                 Log.d("post", "end");
+
                             }
 
 
@@ -282,13 +283,11 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
             progressDialog.setMessage("Uploading");
             progressDialog.show();
             Log.d("post", "start");
-
             saveProfilePic(uploadid);
-
         } else if (view == buttonCamera){
             // Open camera to take picture
             if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(PostItem.this, new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                ActivityCompat.requestPermissions(PostFoundItem.this, new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
             }
             else {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

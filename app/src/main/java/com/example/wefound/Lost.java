@@ -108,6 +108,7 @@ public class Lost extends AppCompatActivity {
 
 
         lostItemReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/record_lost_nav"
+        android:title="Lost"
+        android:icon="@drawable/ic_baseline_mobile_off_24"/>
+    <item
+        android:id="@+id/record_found_nav"
+        android:title="Found"
+        android:icon="@drawable/ic_baseline_mobile_friendly_24"/>
+</menu>

@@ -1,6 +1,7 @@
 package com.example.wefound;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,12 +33,16 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     Button detailsBtn;
     ViewHolder_Record holder;
     boolean isSelected = false;
-    public LostItemAdapter.RecyclerViewOnClickListener listener;
+    public RecordAdapter.RecyclerViewOnClickListener listener;
+    public RecordAdapter.RecyclerViewOnClickListener deletelistener;
+    public RecordAdapter.RecyclerViewOnClickListener deleteimageListener;
 
-    public RecordAdapter(Context context, ArrayList<Item> lostItems,  LostItemAdapter.RecyclerViewOnClickListener listener) {
+    public RecordAdapter(Context context, ArrayList<Item> lostItems,  RecordAdapter.RecyclerViewOnClickListener listener, RecordAdapter.RecyclerViewOnClickListener deletelistener, RecordAdapter.RecyclerViewOnClickListener deleteimageListener) {
         this.context = context;
         this.listener = listener;
         this.lostItems = lostItems;
+        this.deletelistener = deletelistener;
+        this.deleteimageListener = deleteimageListener;
     }
 
     public RecordAdapter(Context context, ArrayList<Item> lostItems) {
@@ -69,21 +81,39 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         holder.lostitemLocation.setText(shortenString(lostItems.get(position).getLocation()));
         holder.lostitemTime.setText(shortenString(lostItems.get(position).getTime()));
         Picasso.get().load(lostItems.get(position).getImageurl()).fit().centerCrop().into(holder.lostItemImage);
-        holder.checkedImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.checkedImage.setVisibility(View.INVISIBLE);
-                holder.uncheckedImage.setVisibility(View.VISIBLE);
-            }
-        });
+//        String itemID = lostItems.get(position).getmyItemID();
+//        holder.deleteImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                DatabaseReference lostItemReference = FirebaseDatabase.getInstance().getReference("/LOST/" ).child(itemID);
+//                lostItemReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        lostItems.remove(position);
+//                        //Toast.makeText(, "Delete successfully", Toast.LENGTH_SHORT).show();
+//                        Log.d("delete", "success-------");
+//                    }
+//                });
+////                DatabaseReference lostItemReference = FirebaseDatabase.getInstance().getReference("/LOST/" );
+////                Query myquery = lostItemReference.orderByKey().equalTo(itemID);
+////                myquery.addListenerForSingleValueEvent(new ValueEventListener() {
+////                    @Override
+////                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+////                        for (DataSnapshot sp : snapshot.getChildren()) {
+////
+////                        }
+////                    }
+////
+////                    @Override
+////                    public void onCancelled(@NonNull DatabaseError error) {
+////
+////                    }
+////                });
+//            }
+//        });
 
-        holder.uncheckedImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.checkedImage.setVisibility(View.VISIBLE);
-                holder.uncheckedImage.setVisibility(View.INVISIBLE);
-            }
-        });
+
     }
 
 
@@ -98,12 +128,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
-    public class ViewHolder_Record extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder_Record extends RecyclerView.ViewHolder{
 
         private TextView lostitemName, lostitemLocation, lostitemTime;
         private ImageView lostItemImage;
-        private ImageView checkedImage;
-        private ImageView uncheckedImage;
+        private ImageView deleteImage;
+
 
 
         private CardView parent;
@@ -115,17 +145,27 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             parent = itemView.findViewById(R.id.recorditemparent);
             detailsBtn = itemView.findViewById(R.id.recordItemDetailsBtn);
             lostItemImage = itemView.findViewById(R.id.recorditemimage);
-            checkedImage = itemView.findViewById(R.id.checkedimage);
-            uncheckedImage = itemView.findViewById(R.id.uncheckedimage);
+            deleteImage = itemView.findViewById(R.id.deleteimage);
 
-            detailsBtn.setOnClickListener(this);
+
+            detailsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(v, getAdapterPosition());
+                }
+            });
+            deleteImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deletelistener.onClick(v, getAdapterPosition());
+                }
+            });
+
+
 
         }
 
-        @Override
-        public void onClick(View v) {
-            listener.onClick(v, getAdapterPosition());
-        }
+
     }
 
     public interface RecyclerViewOnClickListener {

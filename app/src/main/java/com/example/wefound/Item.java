@@ -13,6 +13,30 @@ public class Item {
     public String username;
     public String imageurl;
     public String userID;
+    public String myItemID;
+
+    public String getmyItemID() {
+        return myItemID;
+    }
+
+    public void setItemID(String myitemID) {
+        myItemID = myitemID;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", time='" + time + '\'' +
+                ", phone='" + phone + '\'' +
+                ", username='" + username + '\'' +
+                ", imageurl='" + imageurl + '\'' +
+                ", userID='" + userID + '\'' +
+                ", ItemID='" + myItemID + '\'' +
+                '}';
+    }
 
     public void setUserID(String userID) {
         this.userID = userID;
@@ -55,23 +79,10 @@ public class Item {
     }
 
 
-    @Override
-    public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                ", time='" + time + '\'' +
-                ", phone='" + phone + '\'' +
-                ", username='" + username + '\'' +
-                ", imageurl='" + imageurl + '\'' +
-                '}';
-    }
-
     public Item() {
     }
 
-    public Item(String name, String location, String description, String time, String phone, String username, String imageurl, String userID) {
+    public Item(String name, String location, String description, String time, String phone, String username, String imageurl, String userID, String myItemID) {
         this.name = name;
         this.location = location;
         this.description = description;
@@ -80,6 +91,7 @@ public class Item {
         this.username = username;
         this.imageurl = imageurl;
         this.userID = userID;
+        this.myItemID = myItemID;
 
     }
 

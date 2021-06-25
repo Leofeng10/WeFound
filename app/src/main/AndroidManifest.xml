@@ -17,10 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeFound">
-        <activity android:name=".MessageViewActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".PostFoundItem"
+            android:parentActivityName=".Found"></activity>
+        <activity
+            android:name=".MessageViewActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MessageActivity"
-            android:parentActivityName=".LostItemDetail" />
+            android:parentActivityName=".Lost" />
         <activity
             android:name=".ResetPassword"
             android:parentActivityName=".Login" />

@@ -132,15 +132,20 @@ public class LostItemDetail extends AppCompatActivity {
     }
 
     public void makePhoneCall() {
-        if (phone.trim().length() > 0) {
-            if (ContextCompat.checkSelfPermission(LostItemDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(LostItemDetail.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        if (!firebaseAuth.getCurrentUser().getUid().equals(messageID)) {
+            if (phone.trim().length() > 0) {
+                if (ContextCompat.checkSelfPermission(LostItemDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(LostItemDetail.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                } else {
+                    String dial = "tel: " + phone;
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                }
             } else {
-                String dial = "tel: " + phone;
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                Toast.makeText(getApplicationContext(), "Phone Number not available", Toast.LENGTH_LONG);
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Phone Number not available", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"You can not call yourself.",Toast.LENGTH_LONG).show();
+
         }
     }
 

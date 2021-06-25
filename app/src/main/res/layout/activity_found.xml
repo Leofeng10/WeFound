@@ -6,4 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".Found">
 
+
+
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foundItemView"
+        android:layout_width="400dp"
+        android:layout_height="614dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.495" />
+
+    <TextView
+        android:id="@+id/greetingMSG1"
+        android:layout_width="167dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
+        android:text="Hi"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/postFoundBtn"
+        android:layout_width="148dp"
+        android:layout_height="38dp"
+        android:text="+ POST"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toEndOf="@+id/greetingMSG"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

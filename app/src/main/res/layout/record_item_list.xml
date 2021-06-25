@@ -121,7 +121,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
-            android:id="@+id/uncheckedimage"
+            android:id="@+id/deleteimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -129,18 +129,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="visible"
-            app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
+            app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
 
-        <ImageView
-            android:id="@+id/checkedimage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/recorditemimage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/ic_baseline_radio_button_checked_24" />
+<!--        <ImageView-->
+<!--            android:id="@+id/checkedimage"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/recorditemimage"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:visibility="invisible"-->
+<!--            app:srcCompat="@drawable/ic_baseline_radio_button_checked_24" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
