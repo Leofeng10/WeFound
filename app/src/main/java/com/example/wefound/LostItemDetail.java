@@ -29,7 +29,7 @@ public class LostItemDetail extends AppCompatActivity {
     private static final int REQUEST_CALL = 1;
     TextView Detailsname, DetailsLocation, DetailsTime, DetailsDescription, DetailsUserName, DetailsPhone;
     ImageView imageView;
-    Button buttonCallBtn, buttonSMSBtn, buttonSMSSend;
+    Button buttonCallBtn, buttonSMSBtn;
     String phone, name,imageUri, messageID;
     EditText message;
     @Override
@@ -44,13 +44,13 @@ public class LostItemDetail extends AppCompatActivity {
         DetailsTime = findViewById(R.id.detailsTime);
         DetailsDescription = findViewById(R.id.detailsDescription);
         DetailsUserName = findViewById(R.id.detailsUserName);
-        DetailsPhone = findViewById(R.id.detailsPhone);
+
         imageView = findViewById(R.id.detailsImage);
         buttonCallBtn = findViewById(R.id.buttonCall);
         buttonSMSBtn = findViewById(R.id.buttonMessage);
         message = findViewById(R.id.messageContent);
-        buttonSMSSend = findViewById(R.id.buttonSend);
-        buttonSMSSend.setEnabled(false);
+
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         Intent i = getIntent();
@@ -59,7 +59,7 @@ public class LostItemDetail extends AppCompatActivity {
         DetailsLocation.setText(i.getStringExtra("location"));
         DetailsTime.setText(i.getStringExtra("time"));
         DetailsDescription.setText(i.getStringExtra("description"));
-        DetailsPhone.setText(i.getStringExtra("phone"));
+       
         phone = i.getStringExtra("phone");
         imageUri = i.getStringExtra("image");
         DetailsUserName.setText(i.getStringExtra("username"));
@@ -73,8 +73,7 @@ public class LostItemDetail extends AppCompatActivity {
 //                message.setVisibility(View.VISIBLE);
 //                DetailsDescription.setVisibility(View.INVISIBLE);
 //                buttonCallBtn.setEnabled(false);
-//                buttonSMSBtn.setEnabled(false);
-//                buttonSMSSend.setEnabled(true);
+//
 
                 if (!firebaseAuth.getCurrentUser().getUid().equals(messageID)){
                     Intent i = new Intent(getApplicationContext(), MessageActivity.class);
@@ -103,18 +102,7 @@ public class LostItemDetail extends AppCompatActivity {
             }
         });
 
-        buttonSMSSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendSMS(v);
-                buttonCallBtn.setEnabled(true);
-                buttonSMSBtn.setEnabled(true);
-                buttonSMSSend.setEnabled(false);
-                message.setVisibility(View.INVISIBLE);
-                DetailsDescription.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(), "Message Sent Successfully", Toast.LENGTH_LONG);
-            }
-        });
+
     }
 
     @Override

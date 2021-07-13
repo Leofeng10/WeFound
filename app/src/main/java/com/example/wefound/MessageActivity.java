@@ -1,13 +1,23 @@
 package com.example.wefound;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,9 +38,11 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
     private DatabaseReference databaseReference;
 
-    private ListView listViewMessage;
+    private RecyclerView listViewMessage;
     private EditText edittext_chatbox;
     private Button button_chatbox_send;
+
+    TextView textToUser;
 
     private String userId, postUserEmail, messageUserId, messageId;
 
@@ -68,8 +80,15 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         Intent intent = getIntent();
+        String toname = intent.getStringExtra("name");
 
         userId = firebaseAuth.getCurrentUser().getUid();
+
+        textToUser = findViewById(R.id.textToUser);
+
+
+
+        textToUser.setText(toname);
 
 
         // Get intent passed data
@@ -77,6 +96,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         //postUserEmail = intent.getStringExtra(PostViewActivity.POST_USER_EMAIL);
 
         messageList = new ArrayList<>();
+
+        listViewMessage = findViewById(R.id.listViewMessage);
+        listViewMessage.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         // Locate the message history betwee nthe two user
         databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + userId + "/CHAT/");
@@ -110,7 +132,8 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                             Message message = postSnapshot.getValue(Message.class);
                             messageList.add(message);
                         }
-                        MessageAdapter messageAdapter = new MessageAdapter(MessageActivity.this, messageList);
+                        MessageAdapter messageAdapter = new MessageAdapter();
+                        messageAdapter.setMessageModelList(messageList);
                         listViewMessage.setAdapter(messageAdapter);
                     }
                     @Override
@@ -128,16 +151,46 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         // Initialize
         edittext_chatbox = (EditText) findViewById(R.id.edittext_chatbox);
         button_chatbox_send = (Button) findViewById(R.id.button_chatbox_send);
-        listViewMessage = (ListView) findViewById(R.id.listViewMessage);
+
 
         // Set listener
         button_chatbox_send.setOnClickListener(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View view) {
         // Send message
         if (view == button_chatbox_send){
+//            String sms = "You received a message";
+//            CharSequence name = "WeFound";
+//            int importance = NotificationManager.IMPORTANCE_LOW;
+//            NotificationChannel notificationChannel = new NotificationChannel("my_channel",name, importance );
+//
+//            notificationChannel.setDescription(sms);
+//            notificationChannel.enableVibration(true);
+//            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+//
+//            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//            notificationManager.createNotificationChannel(notificationChannel);
+//
+//            NotificationCompat.Builder builder = new NotificationCompat.Builder(MessageActivity.this)
+//                    .setSmallIcon(R.drawable.ic_baseline_chat_24)
+//                    .setContentTitle("WeFound")
+//                    .setContentText(sms)
+//                    .setOngoing(true)
+//                    .setChannelId("my_channel")
+//                    .setAutoCancel(true);
+//
+//            Intent intent = new Intent(getApplicationContext(), Lost.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.putExtra("message", sms);
+//            PendingIntent pendingIntent = PendingIntent.getActivity(MessageActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            builder.setContentIntent(pendingIntent);
+//
+//            notificationManager.notify(0, builder.build());
+
+
             databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + userId + "/INFO/");
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -147,7 +200,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                     if (!content.isEmpty()){
                         edittext_chatbox.setText("");
                         User user = dataSnapshot.getValue(User.class);
-                        Message message = new Message(content,user.getName());
+                        Message message = new Message(content,user.getName(), firebaseAuth.getCurrentUser().getUid());
                         databaseReference = FirebaseDatabase.getInstance().getReference("/MESSAGES/" + messageId);
                         String postUID = databaseReference.push().getKey();
                         databaseReference.child(postUID).setValue(message);

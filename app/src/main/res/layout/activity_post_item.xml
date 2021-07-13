@@ -16,22 +16,35 @@
         android:hint="Item"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/postLostItemTime"
         app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/postLostItemTime"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.539" />
+
+    <ImageView
+        android:id="@+id/pickLocationBtn"
+        android:layout_width="30dp"
+        android:layout_height="38dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/postLostItemLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toEndOf="@+id/postLostItemLocation"
+        app:layout_constraintTop_toTopOf="@+id/postLostItemLocation"
+        app:layout_constraintVertical_bias="0.095"
+        app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
     <EditText
         android:id="@+id/postLostItemLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:width="300dp"
+        android:width="260dp"
         android:ems="10"
         android:hint="Location"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/postItemImage"
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,9 +60,9 @@
         android:hint="Add some descriptions"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/postLostItemUser"
         app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/postLostItemUser"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.811" />
 

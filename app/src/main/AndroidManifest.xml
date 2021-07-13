@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,8 +19,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeFound">
-        <activity android:name=".PostFoundItem"
-            android:parentActivityName=".Found"></activity>
+        <activity android:name=".Notification"></activity>
+        <activity
+            android:name=".SelectLocation"
+            android:parentActivityName=".PostItem" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAUyYOtDzI_JAlSCgYgHyaycGoM9YL0e7w" />
+
+        <activity
+            android:name=".PostFoundItem"
+            android:parentActivityName=".Found" />
         <activity
             android:name=".MessageViewActivity"
             android:parentActivityName=".MainActivity" />
@@ -54,6 +66,22 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
+        <service android:name=".FirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+
+
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+
+
+            </intent-filter>
+
+
+        </service>
+        <receiver android:name=".NotificationService" />
     </application>
 
 </manifest>

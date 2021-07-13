@@ -7,20 +7,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,6 +41,8 @@ public class chatFragment extends Fragment {
 
     private DatabaseReference databaseReference;
 
+    private FirebaseFirestore firestore;
+
     private ListView listView;
 
     private SearchView searchView;
@@ -43,6 +51,11 @@ public class chatFragment extends Fragment {
     private List<String> messageIds;
 
     private String userId;
+
+    private String token;
+
+    private String useridfortoken;
+
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -140,6 +153,18 @@ public class chatFragment extends Fragment {
             }
         });
 
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+
+                token = instanceIdResult.getToken();
+                GenerateToken(token);
+
+            }
+        });
+
+
         // Go to a particular message history to message with that user
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -147,11 +172,48 @@ public class chatFragment extends Fragment {
                 String messageUser = messageUsers.get(i);
                 Intent intent = new Intent(getContext(), MessageActivity.class);
                 intent.putExtra("id", messageUser);
-                startActivity(intent);
+
+
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + messageUser);
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.child("INFO").getValue(User.class);
+
+
+                        intent.putExtra("name", user.getName());
+
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+
+
             }
         });
 
 
     }
+
+    private void GenerateToken(String token) {
+
+        useridfortoken = firebaseAuth.getCurrentUser().getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + useridfortoken);
+        databaseReference.child("TOKEN").setValue(token);
+
+
+
+
+
+    }
+
 
 }

@@ -27,7 +27,7 @@ public class MessageViewAdapter extends ArrayAdapter<String> {
 
     private List<String> messageIds, messageUsers;
 
-    private TextView textViewUser, textViewMessage;
+    private TextView textViewUser, textViewMessage, textViewTime;
 
     private String messageId;
 
@@ -46,6 +46,7 @@ public class MessageViewAdapter extends ArrayAdapter<String> {
         // Initialize
         textViewUser = (TextView) messageView.findViewById(R.id.textViewUser);
         textViewMessage = (TextView) messageView.findViewById(R.id.textViewMessage);
+        textViewTime = messageView.findViewById(R.id.textViewTime);
 
         textViewMessage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
@@ -85,6 +86,7 @@ public class MessageViewAdapter extends ArrayAdapter<String> {
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                 Message message = postSnapshot.getValue(Message.class);
                                 textViewMessage.setText(message.getText());
+                                //textViewTime.setText(message.getTime());
                             }
                         }
                         @Override

@@ -120,6 +120,7 @@ public class recordLost extends Fragment {
         lostItemReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lostItems.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Item mItem = postSnapshot.getValue(Item.class);
                     if (mItem.getUserID().equals(userId))
@@ -163,14 +164,9 @@ public class recordLost extends Fragment {
                 String itemID = lostItems.get(position).getmyItemID();
 
                 DatabaseReference lostItemReference = FirebaseDatabase.getInstance().getReference("/LOST/" ).child(itemID);
+                lostItemReference.removeValue();
 
-                lostItemReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        getFragmentManager().beginTransaction().replace(R.id.record_container, new recordLost()).commit();
-                        Log.d("delete", "success-------");
-                    }
-                });
+//
             }
         };
 

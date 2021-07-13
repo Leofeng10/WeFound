@@ -9,6 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,20 +82,79 @@ public class LostFoundFragment extends Fragment {
         lostBtn = getView().findViewById(R.id.lostBtn);
         fountBtn = getView().findViewById(R.id.foundBtn);
 
+        FirebaseAuth firebaseAuth;
+
+        DatabaseReference databaseReference;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        String userId = firebaseAuth.getCurrentUser().getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + userId);
+
+
+
+
+
+
+
 
         lostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(), Lost.class);
-                startActivity(i);
+
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.child("INFO").getValue(User.class);
+                        if (user == null) {
+                            Toast.makeText(getContext(), "Please finish your profile", Toast.LENGTH_SHORT);
+
+                            Intent i = new Intent(getContext(), UserInfoActivity.class);
+                            startActivity(i);
+                        } else {
+                            Intent i = new Intent(getContext(), Lost.class);
+                            startActivity(i);
+                        }
+
+
+
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
         fountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(), Found.class);
-                startActivity(i);
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.child("INFO").getValue(User.class);
+                        if (user == null) {
+                            Toast.makeText(getContext(), "Please finish your profile", Toast.LENGTH_SHORT);
+                            Intent i = new Intent(getContext(), UserInfoActivity.class);
+                            startActivity(i);
+                        } else {
+                            Intent i = new Intent(getContext(), Found.class);
+                            startActivity(i);
+                        }
+
+
+
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -42,7 +45,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
-public class PostItem extends AppCompatActivity implements View.OnClickListener{
+
+public class PostItem extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth firebaseAuth;
 
@@ -59,7 +63,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar progressBar;
 
     Button postBtn, buttonCamera, buttonChooseImage;
-    ImageView image;
+    ImageView image, pickLocation;
     EditText name, location, description, time, phone, username;
     private Uri imageFilePath;
     private Bitmap imageToStore;
@@ -67,8 +71,11 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
     private byte[] imageInByte;
 
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int PICK_LOCATION_REQUEST = 1;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+
+    private FusedLocationProviderClient client;
 
     FirebaseDatabase root;
     DatabaseReference reference;
@@ -87,6 +94,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
         image = findViewById(R.id.postItemImage);
         buttonCamera = findViewById(R.id.lost_buttonCamera);
         buttonChooseImage = findViewById(R.id.button_lost_choose_image);
+        pickLocation = findViewById(R.id.pickLocationBtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -104,10 +112,35 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener{
         postBtn.setOnClickListener(this);
         buttonCamera.setOnClickListener(this);
         buttonChooseImage.setOnClickListener(this);
+
+        client = LocationServices.getFusedLocationProviderClient(PostItem.this);
+
+
+        pickLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCurrentLocation();
+                Log.d("select", "select location");
+            }
+
+
+        });
     }
 
 
+    private void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("select", "no");
+            ActivityCompat.requestPermissions(PostItem.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PICK_LOCATION_REQUEST);
 
+
+        } else {
+            Intent i = new Intent(getApplicationContext(), SelectLocation.class);
+            startActivity(i);
+        }
+
+
+    }
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");

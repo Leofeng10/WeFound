@@ -2,6 +2,7 @@ package com.example.wefound;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -20,8 +21,11 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private FirebaseAuth firebaseAuth;
+
+
     private TextView navEmail;
 
     @Override
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
         phone = intent.getStringExtra("phone");
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
 
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_item_3:
                         // Log out
 
+                        firebaseAuth.signOut();
                         finish();
                         startActivity(new Intent(getApplicationContext(), Login.class));
                         return true;
@@ -108,6 +116,60 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+        DatabaseReference databaseReference;
+
+
+
+        String userId = firebaseAuth.getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + userId);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child("INFO").getValue(User.class);
+                if (user == null) {
+                    //Toast.makeText(getContext(), "Please finish your profile", Toast.LENGTH_SHORT);
+
+//                    AlertDialog dialog = new AlertDialog.Builder(getApplicationContext())
+//                            .setTitle("Please finish profile")
+//                            .setMessage("Chat is available after profile is finished")
+//                            .setPositiveButton("Finish profile", null)
+//                            .setNegativeButton("Cancel", null)
+//                            .show();
+//
+//
+//                    Button positiveBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+//                    positiveBtn.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Intent i = new Intent(getApplicationContext(), UserInfoActivity.class);
+//                            startActivity(i);
+//                        }
+//                    });
+
+                    Intent i = new Intent(getApplicationContext(), UserInfoActivity.class);
+                    startActivity(i);
+
+
+
+                } else {
+
+                }
+
+
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         BottomNavigationView.OnNavigationItemSelectedListener listener =
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -120,8 +182,11 @@ public class MainActivity extends AppCompatActivity {
                                 selected = new LostFoundFragment();
                                 break;
                             case R.id.chatFragment:
+
+
                                 selected = new chatFragment();
                                 break;
+
                             case R.id.recordFragment:
                                 selected = new recordFragment();
                                 break;
