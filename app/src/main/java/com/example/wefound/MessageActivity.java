@@ -80,7 +80,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         Intent intent = getIntent();
-        String toname = intent.getStringExtra("name");
+        String toname = intent.getStringExtra("username");
 
         userId = firebaseAuth.getCurrentUser().getUid();
 

@@ -19,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailsImage" />
 
+
     <ProgressBar
         android:id="@+id/progress_bar2"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -31,9 +32,8 @@
 
         app:layout_constraintBottom_toTopOf="@+id/detailsDescription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsUserName" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/detailsUserName"
+        app:layout_constraintVertical_bias="0.31" />
 
     <TextView
         android:id="@+id/detailsName"
@@ -43,7 +43,7 @@
 
         android:text="TextView"
 
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -59,13 +59,13 @@
         android:drawableLeft="@drawable/ic_baseline_location_24"
         android:text="TextView"
 
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/detailsName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/detailsName"
         app:layout_constraintTop_toBottomOf="@+id/detailsName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.025" />
 
     <TextView
         android:id="@+id/detailsTime"
@@ -74,13 +74,23 @@
         android:drawableLeft="@drawable/ic_baseline_access_time_24"
         android:text="TextView"
 
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/detailsLocation"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/detailsLocation"
         app:layout_constraintTop_toBottomOf="@+id/detailsLocation"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.026" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/detailsDescription"
+        app:layout_constraintEnd_toEndOf="@+id/detailsUserName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/detailsUserName" />
 
     <ImageView
         android:id="@+id/detailsImage"
@@ -94,23 +104,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.027" />
 
+
     <TextView
         android:id="@+id/detailsUserName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-
-        android:text="TextView"
         android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:text="TextView"
 
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/detailsTime"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/detailsTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
-
-
+        app:layout_constraintVertical_bias="0.447" />
 
     <TextView
         android:id="@+id/detailsDescription"
@@ -119,13 +127,13 @@
 
         android:text="TextView"
 
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/detailsUserName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/detailsUserName"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738" />
+        app:layout_constraintVertical_bias="0.774" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -164,20 +172,6 @@
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/messageContent"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Send your message here"
-        android:inputType="textMultiLine"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.955" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

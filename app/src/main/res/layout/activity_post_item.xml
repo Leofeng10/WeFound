@@ -100,7 +100,7 @@
         android:layout_width="302dp"
         android:layout_height="182dp"
         android:layout_margin="5dp"
-        android:src="@mipmap/ic_launcher"
+        app:srcCompat="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.45"

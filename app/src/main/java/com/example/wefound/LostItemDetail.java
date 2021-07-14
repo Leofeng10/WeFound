@@ -48,7 +48,7 @@ public class LostItemDetail extends AppCompatActivity {
         imageView = findViewById(R.id.detailsImage);
         buttonCallBtn = findViewById(R.id.buttonCall);
         buttonSMSBtn = findViewById(R.id.buttonMessage);
-        message = findViewById(R.id.messageContent);
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -138,17 +138,5 @@ public class LostItemDetail extends AppCompatActivity {
     }
 
 
-    public void sendSMS(View view) {
-        ActivityCompat.requestPermissions(LostItemDetail.this, new String[] {Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS}, PackageManager.PERMISSION_GRANTED);
-        String SMSContent = message.getText().toString();
-        if (!SMSContent.equals("")) {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phone, null, SMSContent, null, null);
-            Toast.makeText(LostItemDetail.this, "Message Sent Successfully", Toast.LENGTH_LONG);
-        } else {
-            Toast.makeText(getApplicationContext(), "Message is empty", Toast.LENGTH_LONG);
-        }
-        Toast.makeText(LostItemDetail.this, "Message Sent Successfully", Toast.LENGTH_LONG);
 
-    }
 }

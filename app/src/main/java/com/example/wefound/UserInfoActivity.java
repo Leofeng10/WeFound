@@ -195,12 +195,12 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
-                Toast.makeText(UserInfoActivity.this, "Upload failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserInfoActivity.this, "Upload failed", Toast.LENGTH_SHORT).show();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(UserInfoActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
                 Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                 while (!urlTask.isSuccessful());
                 Uri downloadUrl = urlTask.getResult();
@@ -224,7 +224,8 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Profile Updates", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Profile Updates", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
                         }
                     });
@@ -252,7 +253,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             }, 500);
 
-                            //Toast.makeText(UserInfoActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
                             Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                             while (!urlTask.isSuccessful());
                             Uri downloadUrl = urlTask.getResult();
@@ -276,6 +277,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(getApplicationContext(), "Profile Updates", Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
                                         }
                                     }
                                 });
@@ -290,7 +292,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(UserInfoActivity.this, "0000000000000000" + e.getMessage(), Toast.LENGTH_LONG).show();
+
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -328,12 +330,12 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         databaseReference.child("INFO").setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(), "User Profile Updated", Toast.LENGTH_LONG).show();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Fail to Update", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Fail to Update", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -360,12 +362,12 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_SHORT).show();
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
             else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -393,7 +395,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             saveProfilePic();
             //saveUser();
             addUser();
-            progressDialog.dismiss();
+
         }
         else if (view == buttonCamera){
             // Open camera to take picture
