@@ -113,7 +113,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
         buttonCamera.setOnClickListener(this);
         buttonChooseImage.setOnClickListener(this);
 
-        client = LocationServices.getFusedLocationProviderClient(PostItem.this);
+        //client = LocationServices.getFusedLocationProviderClient(PostItem.this);
 
 
         pickLocation.setOnClickListener(new View.OnClickListener() {

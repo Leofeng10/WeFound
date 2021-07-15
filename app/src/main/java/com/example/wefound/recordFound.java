@@ -129,8 +129,9 @@ public class recordFound extends Fragment {
                     RecordAdapter adapter = new RecordAdapter(getContext(), foundItems, listener, deleteListener, deleteimageListener);
                     foundRecItem.setAdapter(adapter);
                     foundRecItem.setLayoutManager(new GridLayoutManager(getContext(), 1));
-                    progressDialog.dismiss();
+
                 }
+                progressDialog.dismiss();
             }
 
             @Override

@@ -129,8 +129,9 @@ public class recordLost extends Fragment {
                     RecordAdapter adapter = new RecordAdapter(getContext(), lostItems, listener, deleteListener, deleteimageListener);
                     lostRecItem.setAdapter(adapter);
                     lostRecItem.setLayoutManager(new GridLayoutManager(getContext(), 1));
-                    progressDialog.dismiss();
+
                 }
+                progressDialog.dismiss();
             }
 
             @Override

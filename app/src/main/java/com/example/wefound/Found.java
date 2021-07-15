@@ -118,8 +118,9 @@ public class Found extends AppCompatActivity {
                     LostItemAdapter adapter = new LostItemAdapter(getApplicationContext(), lostItems, listener);
                     lostRecItem.setAdapter(adapter);
                     lostRecItem.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-                    progressDialog.dismiss();
+
                 }
+                progressDialog.dismiss();
             }
 
             @Override
