@@ -181,12 +181,6 @@ public class PostFoundItem extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(0);
-                                }
-                            }, 500);
 
                             //Toast.makeText(UserInfoActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                             Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
@@ -225,14 +219,8 @@ public class PostFoundItem extends AppCompatActivity implements View.OnClickList
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(getApplicationContext(), "0000000000000000" + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            progressBar.setProgress((int) progress);
-                        }
                     });
+
         }
         else {
             cameraUpload(path, id);

@@ -21,7 +21,7 @@
 
 
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listView2"
                 android:layout_width="fill_parent"
                 android:layout_height="580dp"

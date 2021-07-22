@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,9 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+//import com.google.firebase.firestore.FirebaseFirestore;
+//import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,9 +43,11 @@ public class chatFragment extends Fragment {
 
     private DatabaseReference databaseReference;
 
-    private FirebaseFirestore firestore;
+//    private FirebaseFirestore firestore;
 
     private ListView listView;
+
+    private RecyclerView recyclerView;
 
     private SearchView searchView;
 
@@ -55,6 +59,9 @@ public class chatFragment extends Fragment {
     private String token;
 
     private String useridfortoken;
+
+    private MessageViewAdapter2.RecyclerViewOnClickListener listener;
+
 
 
 
@@ -112,9 +119,36 @@ public class chatFragment extends Fragment {
             startActivity(new Intent(getContext(), Login.class));
         }
 
-        listView = (ListView) getView().findViewById(R.id.listView2);
+        recyclerView =  getView().findViewById(R.id.listView2);
 
         searchView = (SearchView) getView().findViewById(R.id.searchView);
+
+        listener = new MessageViewAdapter2.RecyclerViewOnClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                String messageUser = messageUsers.get(position);
+                Intent intent = new Intent(getContext(), MessageActivity.class);
+                intent.putExtra("id", messageUser);
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + messageUser);
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.child("INFO").getValue(User.class);
+
+
+                        intent.putExtra("name", user.getName());
+
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        };
 
         userId = firebaseAuth.getCurrentUser().getUid();
 
@@ -144,8 +178,10 @@ public class chatFragment extends Fragment {
                     messageUsers.add(postSnapshot.getKey());
                     messageIds.add(postSnapshot.getValue(String.class));
                 }
-                MessageViewAdapter messageViewAdapter = new MessageViewAdapter((AppCompatActivity) getActivity(),messageUsers);
-                listView.setAdapter(messageViewAdapter);
+                MessageViewAdapter2 messageViewAdapter = new MessageViewAdapter2((AppCompatActivity) getActivity(),messageUsers, listener);
+                recyclerView.setAdapter(messageViewAdapter);
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -154,50 +190,50 @@ public class chatFragment extends Fragment {
         });
 
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-
-                token = instanceIdResult.getToken();
-                GenerateToken(token);
-
-            }
-        });
-
-
-        // Go to a particular message history to message with that user
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String messageUser = messageUsers.get(i);
-                Intent intent = new Intent(getContext(), MessageActivity.class);
-                intent.putExtra("id", messageUser);
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+//            @Override
+//            public void onSuccess(InstanceIdResult instanceIdResult) {
+//
+//                token = instanceIdResult.getToken();
+//                GenerateToken(token);
+//
+//            }
+//        });
 
 
-
-                databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + messageUser);
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.child("INFO").getValue(User.class);
-
-
-                        intent.putExtra("name", user.getName());
-
-                        startActivity(intent);
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
+//        // Go to a particular message history to message with that user
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                String messageUser = messageUsers.get(i);
+//                Intent intent = new Intent(getContext(), MessageActivity.class);
+//                intent.putExtra("id", messageUser);
+//
+//
+//
+//                databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + messageUser);
+//                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        User user = dataSnapshot.child("INFO").getValue(User.class);
+//
+//
+//                        intent.putExtra("name", user.getName());
+//
+//                        startActivity(intent);
+//                    }
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
 
 
 
-            }
-        });
+
+//
+//            }
+//        });
 
 
     }

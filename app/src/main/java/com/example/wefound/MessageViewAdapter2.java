@@ -4,10 +4,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -18,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class MessageViewAdapter extends ArrayAdapter<String> {
+public class MessageViewAdapter2 extends RecyclerView.Adapter<MessageViewAdapter2.ViewHolder>{
 
     private FirebaseAuth firebaseAuth;
 
@@ -32,24 +35,26 @@ public class MessageViewAdapter extends ArrayAdapter<String> {
 
     private String messageId;
 
+    public MessageViewAdapter2.RecyclerViewOnClickListener listener;
     // Pass in message list
-    public MessageViewAdapter(AppCompatActivity context, List<String> messageUsers){
-        super(context, R.layout.card_message,messageUsers);
+    public MessageViewAdapter2(AppCompatActivity context, List<String> messageUsers, MessageViewAdapter2.RecyclerViewOnClickListener listener){
+
         this.context = context;
         this.messageUsers = messageUsers;
+        this.listener = listener;
+    }
+
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_message, parent, false);
+        MessageViewAdapter2.ViewHolder holder = new MessageViewAdapter2.ViewHolder(view);
+        return holder;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View messageView = inflater.inflate(R.layout.card_message, null, true);
-
-        // Initialize
-        textViewUser = (TextView) messageView.findViewById(R.id.textViewUser);
-        textViewMessage = (TextView) messageView.findViewById(R.id.textViewMessage);
-        textViewTime = messageView.findViewById(R.id.textViewTime);
-
-        textViewMessage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         String messageUser = messageUsers.get(position);
 
@@ -63,9 +68,9 @@ public class MessageViewAdapter extends ArrayAdapter<String> {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child("INFO").getValue(User.class);
-                Log.d("position", position+"-----"+user.getName() +"---"+textViewUser.getText());
-                textViewUser.setText(user.getName());
-                Log.d("position", position+"-----"+user.getName() +"---"+textViewUser.getText());
+                //Log.d("position", position+"-----"+user.getName() +"---"+textViewUser.getText());
+                holder.textViewUser.setText(user.getName());
+                Log.d("position", position+"-----"+user.getName() +"---"+holder.textViewUser.getText());
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -90,7 +95,7 @@ public class MessageViewAdapter extends ArrayAdapter<String> {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                 Message message = postSnapshot.getValue(Message.class);
-                                textViewMessage.setText(message.getText());
+                                holder.textViewMessage.setText(message.getText());
                                 //textViewTime.setText(message.getTime());
                             }
                         }
@@ -107,6 +112,36 @@ public class MessageViewAdapter extends ArrayAdapter<String> {
             }
         });
 
-        return messageView;
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return messageUsers.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private TextView textViewUser, textViewMessage;
+
+
+        private CardView parent;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewUser = itemView.findViewById(R.id.textViewUser);
+            textViewMessage = itemView.findViewById(R.id.textViewMessage);
+
+
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v, getAdapterPosition());
+        }
+    }
+
+    public interface RecyclerViewOnClickListener {
+        void onClick(View v, int position);
     }
 }

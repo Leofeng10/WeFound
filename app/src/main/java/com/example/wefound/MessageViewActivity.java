@@ -2,6 +2,8 @@ package com.example.wefound;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,11 +30,14 @@ public class MessageViewActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private ListView listView;
+    private RecyclerView recyclerView;
 
     private SearchView searchView;
 
     private List<String> messageUsers;
     private List<String> messageIds;
+
+    private MessageViewAdapter2.RecyclerViewOnClickListener listener;
 
     private String userId;
 
@@ -52,7 +57,9 @@ public class MessageViewActivity extends AppCompatActivity {
             startActivity(new Intent(this, Login.class));
         }
 
-        listView = (ListView) findViewById(R.id.listView);
+        //listView = (ListView) findViewById(R.id.listView);
+
+        recyclerView = findViewById(R.id.listView);
 
         searchView = (SearchView) findViewById(R.id.searchView);
 
@@ -73,6 +80,17 @@ public class MessageViewActivity extends AppCompatActivity {
             }
         });
 
+        listener = new MessageViewAdapter2.RecyclerViewOnClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                String messageUser = messageUsers.get(position);
+                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+                intent.putExtra("id", messageUser);
+                startActivity(intent);
+            }
+        };
+
+
         // Populate all message history
         databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + userId + "/CHAT/");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -84,8 +102,9 @@ public class MessageViewActivity extends AppCompatActivity {
                     messageUsers.add(postSnapshot.getKey());
                     messageIds.add(postSnapshot.getValue(String.class));
                 }
-                MessageViewAdapter messageViewAdapter = new MessageViewAdapter(MessageViewActivity.this,messageUsers);
-                listView.setAdapter(messageViewAdapter);
+                MessageViewAdapter2 messageViewAdapter = new MessageViewAdapter2(MessageViewActivity.this,messageUsers, listener);
+                recyclerView.setAdapter(messageViewAdapter);
+                recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -94,15 +113,19 @@ public class MessageViewActivity extends AppCompatActivity {
         });
 
         // Go to a particular message history to message with that user
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String messageUser = messageUsers.get(i);
-                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
-                intent.putExtra("id", messageUser);
-                startActivity(intent);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                String messageUser = messageUsers.get(i);
+//                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+//                intent.putExtra("id", messageUser);
+//                startActivity(intent);
+//            }
+//        });
+
+
+
+
 
 
     }

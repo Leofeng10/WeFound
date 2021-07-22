@@ -26,8 +26,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
+//import com.google.android.gms.location.FusedLocationProviderClient;
+//import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -75,7 +75,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
 
-    private FusedLocationProviderClient client;
+    //private FusedLocationProviderClient client;
 
     FirebaseDatabase root;
     DatabaseReference reference;
@@ -94,7 +94,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
         image = findViewById(R.id.postItemImage);
         buttonCamera = findViewById(R.id.lost_buttonCamera);
         buttonChooseImage = findViewById(R.id.button_lost_choose_image);
-        pickLocation = findViewById(R.id.pickLocationBtn);
+//        pickLocation = findViewById(R.id.pickLocationBtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -116,15 +116,15 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
         //client = LocationServices.getFusedLocationProviderClient(PostItem.this);
 
 
-        pickLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCurrentLocation();
-                Log.d("select", "select location");
-            }
-
-
-        });
+//        pickLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getCurrentLocation();
+//                Log.d("select", "select location");
+//            }
+//
+//
+//        });
     }
 
 
@@ -214,12 +214,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(0);
-                                }
-                            }, 500);
+
 
                             //Toast.makeText(UserInfoActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                             Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
@@ -257,14 +252,8 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(getApplicationContext(), "0000000000000000" + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            progressBar.setProgress((int) progress);
-                        }
                     });
+
         }
         else {
             cameraUpload(path, id);
