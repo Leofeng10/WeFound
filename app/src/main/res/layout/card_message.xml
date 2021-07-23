@@ -30,7 +30,7 @@
         android:id="@+id/textViewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User"
+
         android:layout_marginLeft="5dp"
         android:textColor="#F1E9E9"
 
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:maxLines="3"
-        android:text="Message"
+
         android:layout_marginLeft="5dp"
         android:textColor="#DAD5D5"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
