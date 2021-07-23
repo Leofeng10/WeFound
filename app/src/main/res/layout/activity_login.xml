@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     tools:context=".Login"
-    android:background="#A19E9E">
+    android:background="#D6D2D2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         android:padding="24dp"
-        android:background="#A19E9E">
+        android:background="#D6D2D2">
 
         <ImageView
             android:layout_width="150dp"
