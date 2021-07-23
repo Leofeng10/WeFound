@@ -130,6 +130,7 @@ public class MessageViewAdapter2 extends RecyclerView.Adapter<MessageViewAdapter
             super(itemView);
             textViewUser = itemView.findViewById(R.id.textViewUser);
             textViewMessage = itemView.findViewById(R.id.textViewMessage);
+            itemView.setOnClickListener(this);
 
 
         }
@@ -138,6 +139,7 @@ public class MessageViewAdapter2 extends RecyclerView.Adapter<MessageViewAdapter
         @Override
         public void onClick(View v) {
             listener.onClick(v, getAdapterPosition());
+            Log.d("message", "position" + getAdapterPosition());
         }
     }
 

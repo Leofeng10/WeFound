@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MessageViewActivity">
+    tools:context=".MessageViewActivity"
+    android:background="#ACA5A5">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -20,39 +21,27 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
                 android:background="@color/appBar"
                 android:text="Messages"
-                android:textSize="35dp"
+                android:textSize="20dp"
                 android:textColor="@color/tabTextColor" />
 
         </RelativeLayout>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/appBar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
-                android:layoutDirection="rtl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"
-        android:layout_width="fill_parent"
-        android:layout_height="580dp"
+        android:layout_width="match_parent"
+        android:layout_height="627dp"
         android:layout_below="@id/appBar"
-        android:layout_marginBottom="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="5dp"
         android:divider="@null"
         android:dividerHeight="0dp" />
 
@@ -61,13 +50,5 @@
         android:layout_height="wrap_content">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        app:menu="@menu/bottom_navigation"
-        android:background="#D3CACA"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </RelativeLayout>

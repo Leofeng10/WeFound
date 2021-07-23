@@ -4,39 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chatFragment">
+    tools:context=".chatFragment"
+    android:background="#ACA5A5">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--            <androidx.appcompat.widget.SearchView-->
+        <!--                android:id="@+id/searchView"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layoutDirection="rtl"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/appBar"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/appBar"
+                    android:text="Messages"
+                    android:textColor="@color/tabTextColor"
+                    android:textSize="20dp" />
+
+            </RelativeLayout>
 
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listView2"
-                android:layout_width="fill_parent"
-                android:layout_height="580dp"
-                android:layout_below="@id/searchView"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchView"
-                app:layout_constraintVertical_bias="1.0" />
+        </com.google.android.material.appbar.AppBarLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listView2"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar1"
+            app:layout_constraintVertical_bias="0.0"
+            android:layout_height="680dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

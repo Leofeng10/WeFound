@@ -1,5 +1,6 @@
 package com.example.wefound;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -62,6 +63,9 @@ public class chatFragment extends Fragment {
 
     private MessageViewAdapter2.RecyclerViewOnClickListener listener;
 
+    private ProgressDialog progressDialog;
+
+
 
 
 
@@ -119,9 +123,13 @@ public class chatFragment extends Fragment {
             startActivity(new Intent(getContext(), Login.class));
         }
 
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Retrieving data...");
+        progressDialog.show();
+
         recyclerView =  getView().findViewById(R.id.listView2);
 
-        searchView = (SearchView) getView().findViewById(R.id.searchView);
+//        searchView = (SearchView) getView().findViewById(R.id.searchView);
 
         listener = new MessageViewAdapter2.RecyclerViewOnClickListener() {
             @Override
@@ -129,6 +137,7 @@ public class chatFragment extends Fragment {
                 String messageUser = messageUsers.get(position);
                 Intent intent = new Intent(getContext(), MessageActivity.class);
                 intent.putExtra("id", messageUser);
+                Log.d("message", messageUser);
 
                 databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + messageUser);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -137,7 +146,7 @@ public class chatFragment extends Fragment {
                         User user = dataSnapshot.child("INFO").getValue(User.class);
 
 
-                        intent.putExtra("name", user.getName());
+                        intent.putExtra("username", user.getName());
 
                         startActivity(intent);
                     }
@@ -155,17 +164,17 @@ public class chatFragment extends Fragment {
         messageUsers = new ArrayList<>();
         messageIds = new ArrayList<>();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //refreshList(newText);
-                return false;
-            }
-        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //refreshList(newText);
+//                return false;
+//            }
+//        });
 
         // Populate all message history
         databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + userId + "/CHAT/");
@@ -181,6 +190,7 @@ public class chatFragment extends Fragment {
                 MessageViewAdapter2 messageViewAdapter = new MessageViewAdapter2((AppCompatActivity) getActivity(),messageUsers, listener);
                 recyclerView.setAdapter(messageViewAdapter);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+                progressDialog.dismiss();
 
             }
             @Override

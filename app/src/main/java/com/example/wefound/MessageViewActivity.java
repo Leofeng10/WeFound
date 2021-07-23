@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -61,24 +62,35 @@ public class MessageViewActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.listView);
 
-        searchView = (SearchView) findViewById(R.id.searchView);
+//        searchView = (SearchView) findViewById(R.id.searchView);
 
         userId = firebaseAuth.getCurrentUser().getUid();
 
         messageUsers = new ArrayList<>();
         messageIds = new ArrayList<>();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //refreshList(newText);
-                return false;
-            }
-        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //refreshList(newText);
+//                return false;
+//            }
+//        });
+
+//        listener = new MessageViewAdapter2.RecyclerViewOnClickListener() {
+//            @Override
+//            public void onClick(View v, int position) {
+//                String messageUser = messageUsers.get(position);
+//                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+//                intent.putExtra("id", messageUser);
+//                intent.putExtra("username", user.getName());
+//                startActivity(intent);
+//            }
+//        };
 
         listener = new MessageViewAdapter2.RecyclerViewOnClickListener() {
             @Override
@@ -86,7 +98,25 @@ public class MessageViewActivity extends AppCompatActivity {
                 String messageUser = messageUsers.get(position);
                 Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
                 intent.putExtra("id", messageUser);
-                startActivity(intent);
+                Log.d("message", messageUser);
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("/USERS/" + messageUser);
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.child("INFO").getValue(User.class);
+
+
+                        intent.putExtra("username", user.getName());
+
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         };
 
