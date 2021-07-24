@@ -123,9 +123,9 @@ public class chatFragment extends Fragment {
             startActivity(new Intent(getContext(), Login.class));
         }
 
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Retrieving data...");
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(getContext());
+//        progressDialog.setMessage("Retrieving data...");
+//        progressDialog.show();
 
         recyclerView =  getView().findViewById(R.id.listView2);
 
@@ -190,7 +190,7 @@ public class chatFragment extends Fragment {
                 MessageViewAdapter2 messageViewAdapter = new MessageViewAdapter2((AppCompatActivity) getActivity(),messageUsers, listener);
                 recyclerView.setAdapter(messageViewAdapter);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
 
             }
             @Override

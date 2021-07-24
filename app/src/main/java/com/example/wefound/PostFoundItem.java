@@ -165,7 +165,10 @@ public class PostFoundItem extends AppCompatActivity implements View.OnClickList
                     databaseReference.child(id).setValue(myItem);
                     Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
+                    Intent i = new Intent(getApplicationContext(), Lost.class);
+
                     Log.d("post", "end");
+                    startActivity(i);
                 }
             }
         });
@@ -206,7 +209,10 @@ public class PostFoundItem extends AppCompatActivity implements View.OnClickList
                                 databaseReference.child(id).setValue(myItem);
                                 Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
+                                Intent i = new Intent(getApplicationContext(), Lost.class);
+
                                 Log.d("post", "end");
+                                startActivity(i);
 
                             }
 

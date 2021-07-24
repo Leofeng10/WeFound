@@ -188,7 +188,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
                 String myusername = username.getText().toString();
                 String myphone = phone.getText().toString();
 
-                if (myname.equals("") || mylocation.equals("") || mytime.equals("") || myusername.equals("")){
+                if (myname.equals("") || mylocation.equals("") || mytime.equals("") || myusername.equals("") || downloadUrl == null){
                     Toast.makeText(getApplicationContext(), "You Need to Fill in ALl Information", Toast.LENGTH_SHORT).show();
                 } else {
                     FirebaseUser currUser = firebaseAuth.getCurrentUser();
@@ -198,7 +198,10 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
                     databaseReference.child(id).setValue(myItem);
                     Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
+                    Intent i = new Intent(getApplicationContext(), Lost.class);
+
                     Log.d("post", "end");
+                    startActivity(i);
                 }
             }
         });
@@ -208,6 +211,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
     private void uploadFile(final String path, String id) {
         if (imageUri != null) {
             StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+
 
             uploadTask = fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -230,7 +234,7 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
                             String myphone = phone.getText().toString();
 
 
-                            if (myname.equals("") || mylocation.equals("") || mytime.equals("") || myusername.equals("")){
+                            if (myname.equals("") || mylocation.equals("") || mytime.equals("") || myusername.equals("") || downloadUrl == null){
                                 Toast.makeText(getApplicationContext(), "You Need to Fill in ALl Information", Toast.LENGTH_SHORT).show();
                             } else {
                                 FirebaseUser currUser = firebaseAuth.getCurrentUser();
@@ -240,7 +244,10 @@ public class PostItem extends AppCompatActivity implements View.OnClickListener 
                                 databaseReference.child(id).setValue(myItem);
                                 Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
+                                Intent i = new Intent(getApplicationContext(), Lost.class);
+
                                 Log.d("post", "end");
+                                startActivity(i);
                             }
 
 
