@@ -142,16 +142,6 @@ public class MessageViewActivity extends AppCompatActivity {
             }
         });
 
-        // Go to a particular message history to message with that user
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String messageUser = messageUsers.get(i);
-//                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
-//                intent.putExtra("id", messageUser);
-//                startActivity(intent);
-//            }
-//        });
 
 
 
